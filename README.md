@@ -24,12 +24,3 @@
 
 ### Database 
 This app uses a SQLite database to store contacts. The database file is located at `database/contacts.db`. The tables are created automatically when you run the seed script.
-
-### Seed Script 
-To create databases and tables, use the seed scipt seed.py. Run the following command:
-
-`something`
-
-
-
-
