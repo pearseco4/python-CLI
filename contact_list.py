@@ -9,16 +9,18 @@ def create_contact(first_name, last_name, email):
         'email': email, 
     }
     contacts.append(contact)
-    print(f'Contact created!')
+    print(f'Contact created! {contact}')
 
 def list_contacts():
+    print("listing contacts...")
     if len(contacts) == 0:
         print("Contact list empty")
     else: 
         for contact in contacts: 
             print(f"First Name: {contact['first_name']}\nLast Name: {contact['last_name']}\nEmail: {contact['email']}\n")
 
-def find_contacts(first_name): 
+def find_contact(first_name): 
+    print("Finding contacts...")
     found_contacts = []
     for contact in contacts:
         if contact['first_name'].lower() == first_name.lower():
@@ -31,33 +33,32 @@ def find_contacts(first_name):
             print(f"First Name: {contact['first_name']}\nLast Name: {contact['last_name']}\nEmail: {contact['email']}\n")
 
 def main():
-    parser = argparse.ArgumentParser(description="Contact List")
-
+    parser = argparse.ArgumentParser(description="Contact List")    
     subparsers = parser.add_subparsers(dest='command', help='Available commands')
 
-# create contact command 
-create_parser = subparsers.add_parser('create', help='Create a new contact')
-create_parser.add_argument('first_name', help='First name of contact')
-create_parser.add_argument('last_name', help='Last name of contact')
-create_parser.add_argument('email', help='Email of contact')
+    # create contact command 
+    create_parser = subparsers.add_parser('create', help='Create a new contact')
+    create_parser.add_argument('first_name', help='First name of contact')
+    create_parser.add_argument('last_name', help='Last name of contact')
+    create_parser.add_argument('email', help='Email of contact')
 
-# List contacts command 
-subparsers.add_parse('list', help='List all contacts')
+    # List contacts command 
+    subparsers.add_parse('list', help='List all contacts')
 
-# Find contact command 
-find_parser = subparsers.add_parser('find', help='Find a contact by first name')
-find_parser.add_argument('first_name', help='First name of the contact to find')
+    # Find contact command 
+    find_parser = subparsers.add_parser('find', help='Find a contact by first name')
+    find_parser.add_argument('first_name', help='First name of the contact to find')
 
-args = parser.parse_args()
+    args = parser.parse_args()
 
-if args.command == 'create':
-        create_contact(args.first_name, args.last_name, args.email)
-elif args.command == 'list':
-        list_contacts()
-elif args.command == 'find':
-        find_contact(args.first_name)
-else:
-        print("Invalid command")
+    if args.command == 'create':
+            create_contact(args.first_name, args.last_name, args.email)
+    elif args.command == 'list':
+            list_contacts()
+    elif args.command == 'find':
+            find_contact(args.first_name)
+    else:
+            print("Invalid command")
 
-if __name__ == '__main__':
-    main()
+    if __name__ == '__main__':
+        main()
